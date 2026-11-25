@@ -20,9 +20,9 @@ import { useLayoutEffect, useRef } from "react";
 const Body = styled.div`
   background-color: ${({ theme }) => theme.bg};
   width: 100%;
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 68px);
   @media (max-width: 1099px) {
-    min-height: calc(100dvh - 64px);
+    min-height: calc(100dvh - 56px);
   }
   display: flex;
   flex-direction: column;

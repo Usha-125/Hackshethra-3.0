@@ -30,13 +30,13 @@ const Nav = styled.nav`
 const Bar = styled.div`
   max-width: 1320px;
   margin: auto;
-  height: 80px;
+  height: 68px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
   @media (max-width: 1099px) {
-    height: 64px;
+    height: 56px;
   }
 `;
 const Brand = styled(Link)`
@@ -130,7 +130,7 @@ const Toggle = styled.button`
 const Skip = styled.a`
   position: absolute;
   left: 16px;
-  top: -80px;
+  top: -68px;
   background: ${({ theme }) => theme.bg};
   color: inherit;
   padding: 10px;

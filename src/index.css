@@ -34,7 +34,7 @@ body::before {
 /* width */
 ::-webkit-scrollbar {
   width: 4px;
-  height: 80px;
+  height: 4px;
 }
 
 /* Track */
