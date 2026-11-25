@@ -67,6 +67,10 @@ The included GitHub Actions workflow builds and deploys the site whenever code i
 
 The workflow configures the correct asset and route base for both project sites (`https://<owner>.github.io/<repository>/`) and user sites (`https://<owner>.github.io/`). Direct links to app pages are supported.
 
+## Contact form email delivery
+
+The contact form includes `hack_kshetra@vvce.ac.in` as its `to_email` value. In the EmailJS dashboard, set the contact template's **To Email** field to `{{to_email}}` so submissions are delivered to that mailbox.
+
 ## Useful notes
 
 - If you face dependency issues, try deleting `node_modules` and `package-lock.json`, then run `npm install` again.

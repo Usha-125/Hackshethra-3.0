@@ -4,10 +4,14 @@ import Contact from "./Contact";
 
 jest.mock("@emailjs/browser", () => ({ sendForm: jest.fn() }));
 
-test("retains the draft on failure and includes the sender once on retry", async () => {
+test("sends to the event mailbox and retains the draft for retry", async () => {
   const sent = [];
   emailjs.sendForm.mockImplementation(async (_service, _template, form) => {
-    sent.push(new FormData(form).get("message"));
+    const data = new FormData(form);
+    sent.push({
+      message: data.get("message"),
+      recipient: data.get("to_email"),
+    });
     if (sent.length === 1) throw Error("offline");
   });
   render(<Contact />);
@@ -29,9 +33,10 @@ test("retains the draft on failure and includes the sender once on retry", async
     ),
   );
   expect(sent).toEqual(
-    Array(2).fill(
-      "From: Asha <asha@example.org>\nSubject: Teams\n\nCan we enter?",
-    ),
+    Array(2).fill({
+      message: "From: Asha <asha@example.org>\nSubject: Teams\n\nCan we enter?",
+      recipient: "hack_kshetra@vvce.ac.in",
+    }),
   );
   expect(screen.getByLabelText("Message").value).toBe("");
 });

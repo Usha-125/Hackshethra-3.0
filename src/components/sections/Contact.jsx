@@ -138,6 +138,11 @@ export default function Contact() {
             readOnly={status === "sending"}
           />
         </label>
+        <input
+          type="hidden"
+          name="to_email"
+          value="hack_kshetra@vvce.ac.in"
+        />
         <input type="hidden" name="message" />
         <PrimaryLink as="button" type="submit" disabled={status === "sending"}>
           {status === "sending" ? "Sending…" : "Send message"}
