@@ -24,7 +24,12 @@ test("sends to the event mailbox and retains the draft for retry", async () => {
     fireEvent.change(screen.getByLabelText(label), { target: { value } });
   }
   fireEvent.click(screen.getByRole("button"));
-  await screen.findByText(/could not be sent/);
+  await screen.findByText(/Email delivery is temporarily unavailable/);
+  expect(
+    screen
+      .getByRole("link", { name: "hack_kshetra@vvce.ac.in" })
+      .getAttribute("href"),
+  ).toBe("mailto:hack_kshetra@vvce.ac.in");
   expect(screen.getByLabelText("Message").value).toBe("Can we enter?");
   fireEvent.click(screen.getByRole("button"));
   await waitFor(() =>

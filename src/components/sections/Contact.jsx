@@ -53,6 +53,10 @@ const Form = styled.form`
   textarea {
     resize: vertical;
   }
+  p a {
+    color: ${({ theme }) => theme.accent};
+    text-underline-offset: 3px;
+  }
   .wide,
   button,
   p {
@@ -151,7 +155,16 @@ export default function Contact() {
           {status === "sent"
             ? "Your message has been sent."
             : status === "failed"
-              ? "Your message could not be sent. Please try again."
+              ? (
+                <>
+                  Email delivery is temporarily unavailable. Please email us
+                  directly at{" "}
+                  <a href="mailto:hack_kshetra@vvce.ac.in">
+                    hack_kshetra@vvce.ac.in
+                  </a>
+                  .
+                </>
+              )
               : ""}
         </p>
       </Form>

@@ -71,6 +71,8 @@ The workflow configures the correct asset and route base for both project sites 
 
 The contact form includes `hack_kshetra@vvce.ac.in` as its `to_email` value. In the EmailJS dashboard, set the contact template's **To Email** field to `{{to_email}}` so submissions are delivered to that mailbox.
 
+If submissions fail with `Gmail_API: Invalid grant`, reconnect the Gmail account used by the EmailJS service in the EmailJS dashboard. The contact form provides a direct email link if delivery is unavailable.
+
 ## Useful notes
 
 - If you face dependency issues, try deleting `node_modules` and `package-lock.json`, then run `npm install` again.
