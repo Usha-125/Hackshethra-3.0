@@ -2,6 +2,10 @@
 
 This project is a React-based website for HackKshetra, featuring a modern landing page, animated sections, and 3D visuals.
 
+## Live website
+
+https://usha-125.github.io/Hackshethra-3.0/
+
 ## Download the project
 
 ### Option 1: Clone using Git
