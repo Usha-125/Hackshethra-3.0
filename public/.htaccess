@@ -1,0 +1,47 @@
+# React SPA rewrite and cache-control for SiteGround / Apache
+
+# 1) Single Page App routing: send all non-file requests to index.html
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  # If the request is for an existing file or directory, serve it
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+  # Otherwise, serve index.html so React Router can handle the route
+  # Add a cache-busting query so proxies fetch fresh HTML on each deploy.
+  # Bump the version value below on each deployment if you cannot purge server cache.
+  RewriteRule ^ index.html?v=20251023 [QSA,L]
+</IfModule>
+
+# 2) Prevent caching of HTML so updates appear immediately after deploy
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+</IfModule>
+
+# 3) Long cache for static assets (they are fingerprinted by CRA)
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/javascript "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType image/avif "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresDefault "access plus 1 month"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|css|png|jpg|jpeg|gif|svg|ico|webp|woff|woff2|ttf|otf)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>

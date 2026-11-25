@@ -1,0 +1,62 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+/artifacts
+/output
+
+# Local tooling
+/.playwright-cli
+/.playwright-mcp
+/.taste-skill
+
+# Keep only the photos used by the website, not the full-resolution archive.
+/src/images/hackkshetra 2.0/*
+!/src/images/hackkshetra 2.0/inauguration/
+!/src/images/hackkshetra 2.0/Participants/
+!/src/images/hackkshetra 2.0/Valedictory/
+/src/images/hackkshetra 2.0/inauguration/*
+/src/images/hackkshetra 2.0/Participants/*
+/src/images/hackkshetra 2.0/Valedictory/*
+!/src/images/hackkshetra 2.0/inauguration/DSC09707.jpg
+!/src/images/hackkshetra 2.0/inauguration/DSC09840.jpg
+!/src/images/hackkshetra 2.0/inauguration/DSC09720.jpg
+!/src/images/hackkshetra 2.0/inauguration/DSC09736.jpg
+!/src/images/hackkshetra 2.0/inauguration/DSC09751.jpg
+!/src/images/hackkshetra 2.0/inauguration/DSC09834.jpg
+!/src/images/hackkshetra 2.0/inauguration/DSC09854.jpg
+!/src/images/hackkshetra 2.0/inauguration/DSC09715.jpg
+!/src/images/hackkshetra 2.0/Participants/DSC00215.jpg
+!/src/images/hackkshetra 2.0/Participants/DSC00214.jpg
+!/src/images/hackkshetra 2.0/Participants/DSC00033.jpg
+!/src/images/hackkshetra 2.0/Participants/DSC00177.jpg
+!/src/images/hackkshetra 2.0/Participants/DSC00230.jpg
+!/src/images/hackkshetra 2.0/Participants/DSC00233.jpg
+!/src/images/hackkshetra 2.0/Valedictory/DSC00309.jpg
+!/src/images/hackkshetra 2.0/Valedictory/DSC00299.jpg
+!/src/images/hackkshetra 2.0/Valedictory/DSC00242.jpg
+!/src/images/hackkshetra 2.0/Valedictory/DSC00253.jpg
+!/src/images/hackkshetra 2.0/Valedictory/DSC00264.jpg
+!/src/images/hackkshetra 2.0/Valedictory/DSC00278.jpg
+!/src/images/hackkshetra 2.0/Valedictory/DSC00291.jpg
+!/src/images/hackkshetra 2.0/Valedictory/DSC00312.jpg
+!/src/images/hackkshetra 2.0/Valedictory/DSC00307.jpg
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

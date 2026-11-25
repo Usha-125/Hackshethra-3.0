@@ -1,0 +1,15 @@
+{
+  "short_name": "HACKKSHETRA 3.0",
+  "name": "HACKKSHETRA 3.0 — 24-Hour National-Level Hackathon",
+  "icons": [
+    {
+      "src": "hackkshetra-3-logo.png",
+      "type": "image/png",
+      "sizes": "any"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#175CE6",
+  "background_color": "#090917"
+}

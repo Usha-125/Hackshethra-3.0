@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HACKKSHETRA 3.0 - Loading</title>
+    <link rel="icon" type="image/png" href="hackkshetra-3-logo.png">
+    <link rel="shortcut icon" type="image/png" href="hackkshetra-3-logo.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(30, 144, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(138, 43, 226, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(0, 255, 127, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, #000002 0%, #000510 25%, #001122 50%, #000825 100%);
+            position: relative;
+            animation: backgroundShift 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes backgroundShift {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+            100% {
+                filter: hue-rotate(30deg);
+            }
+        }
+
+        /* Starfield effect */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        .star:nth-child(odd) {
+            animation-delay: 1s;
+        }
+
+        .star:nth-child(3n) {
+            animation-delay: 2s;
+        }
+
+        .star.small {
+            width: 1px;
+            height: 1px;
+            opacity: 0.6;
+        }
+
+        .star.medium {
+            width: 2px;
+            height: 2px;
+            opacity: 0.8;
+        }
+
+        .star.large {
+            width: 3px;
+            height: 3px;
+            opacity: 1;
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        /* Animated background particles */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+            filter: blur(1px);
+        }
+
+        .particle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #ff6b9d, #c471ed, #12c2e9);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: colorShift 8s ease-in-out infinite;
+        }
+
+        @keyframes colorShift {
+            0%, 100% { background: linear-gradient(45deg, #1e90ff, #8a2be2, #00ff7f); }
+            33% { background: linear-gradient(45deg, #00ff7f, #1e90ff, #8a2be2); }
+            66% { background: linear-gradient(45deg, #8a2be2, #00ff7f, #1e90ff); }
+        }
+
+        .particle:nth-child(1) {
+            width: 20px;
+            height: 20px;
+            left: 10%;
+            animation-delay: 0s;
+            animation-duration: 20s;
+        }
+
+        .particle:nth-child(2) {
+            width: 15px;
+            height: 15px;
+            left: 20%;
+            animation-delay: 2s;
+            animation-duration: 18s;
+        }
+
+        .particle:nth-child(3) {
+            width: 25px;
+            height: 25px;
+            left: 30%;
+            animation-delay: 4s;
+            animation-duration: 22s;
+        }
+
+        .particle:nth-child(4) {
+            width: 18px;
+            height: 18px;
+            left: 40%;
+            animation-delay: 6s;
+            animation-duration: 16s;
+        }
+
+        .particle:nth-child(5) {
+            width: 22px;
+            height: 22px;
+            left: 50%;
+            animation-delay: 8s;
+            animation-duration: 19s;
+        }
+
+        .particle:nth-child(6) {
+            width: 16px;
+            height: 16px;
+            left: 60%;
+            animation-delay: 10s;
+            animation-duration: 21s;
+        }
+
+        .particle:nth-child(7) {
+            width: 30px;
+            height: 30px;
+            left: 70%;
+            animation-delay: 12s;
+            animation-duration: 17s;
+        }
+
+        .particle:nth-child(8) {
+            width: 14px;
+            height: 14px;
+            left: 80%;
+            animation-delay: 14s;
+            animation-duration: 23s;
+        }
+
+        .particle:nth-child(9) {
+            width: 28px;
+            height: 28px;
+            left: 90%;
+            animation-delay: 16s;
+            animation-duration: 15s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 2;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Logo container with enhanced effects */
+        .logo-container {
+            position: relative;
+            margin-bottom: 60px;
+            animation: logoFloat 4s ease-in-out infinite alternate;
+        }
+
+        .logo-container::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: conic-gradient(from 0deg, #1e90ff, #8a2be2, #00ff7f, #1e90ff);
+            border-radius: 50%;
+            animation: rotate 4s linear infinite;
+            z-index: -1;
+            opacity: 0.8;
+            filter: blur(8px);
+        }
+
+        .logo {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            border: 6px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 
+                inset 0 0 30px rgba(255, 255, 255, 0.2),
+                0 0 50px rgba(30, 144, 255, 0.4),
+                0 0 100px rgba(138, 43, 226, 0.3),
+                0 0 150px rgba(0, 255, 127, 0.2);
+            transition: all 0.4s ease;
+            object-fit: cover;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo:hover {
+            transform: scale(1.08) rotate(5deg);
+            box-shadow: 
+                inset 0 0 40px rgba(255, 255, 255, 0.3),
+                0 0 70px rgba(30, 144, 255, 0.6),
+                0 0 130px rgba(138, 43, 226, 0.4),
+                0 0 180px rgba(0, 255, 127, 0.3);
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes logoFloat {
+            0% {
+                transform: translateY(0px);
+            }
+            100% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Enhanced Title styling */
+        .title {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #1e90ff, #8a2be2, #00ff7f, #1e90ff);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            animation: titleGradient 3s ease-in-out infinite, titleFloat 2s ease-in-out infinite alternate;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            filter: drop-shadow(0 0 20px rgba(30, 144, 255, 0.4));
+        }
+
+        @keyframes titleGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes titleFloat {
+            0% { transform: translateY(0px) scale(1); }
+            100% { transform: translateY(-10px) scale(1.02); }
+        }
+
+        /* Enhanced Loading text */
+        .loading-text {
+            font-size: 2rem;
+            background: linear-gradient(90deg, #ffffff, #8a2be2, #00ff7f, #ffffff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 40px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            animation: textGlow 3s ease-in-out infinite, textSlide 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.3));
+        }
+
+        @keyframes textGlow {
+            0%, 100% { background-position: 0% 50%; opacity: 0.8; }
+            50% { background-position: 100% 50%; opacity: 1; }
+        }
+
+        @keyframes textSlide {
+            0%, 100% { transform: translateX(0px); }
+            25% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+        }
+
+        /* Enhanced Loading spinner */
+        .spinner {
+            width: 80px;
+            height: 80px;
+            border: 4px solid transparent;
+            border-top: 4px solid #1e90ff;
+            border-right: 4px solid #8a2be2;
+            border-bottom: 4px solid #00ff7f;
+            border-left: 4px solid #1e90ff;
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite, spinGlow 3s ease-in-out infinite;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .spinner::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border: 2px solid transparent;
+            border-top: 2px solid rgba(30, 144, 255, 0.5);
+            border-radius: 50%;
+            animation: spin 2s linear infinite reverse;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes spinGlow {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(30, 144, 255, 0.3);
+                filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.2));
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(30, 144, 255, 0.6);
+                filter: drop-shadow(0 0 20px rgba(138, 43, 226, 0.4));
+            }
+        }
+
+        /* Enhanced Coming soon text */
+        .coming-soon {
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            animation: comingSoonGlow 4s ease-in-out infinite;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes comingSoonGlow {
+            0%, 100% { 
+                opacity: 0.7;
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 1;
+                transform: scale(1.02);
+                text-shadow: 0 0 20px rgba(0, 255, 127, 0.4);
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .logo {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .title {
+                font-size: 2.5rem;
+                margin-bottom: 15px;
+            }
+            
+            .loading-text {
+                font-size: 1.4rem;
+                margin-bottom: 25px;
+            }
+            
+            .coming-soon {
+                font-size: 1rem;
+            }
+            
+            .spinner {
+                width: 50px;
+                height: 50px;
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .title {
+                font-size: 2rem;
+                letter-spacing: 1px;
+            }
+            
+            .loading-text {
+                font-size: 1.2rem;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+        }
+
+        /* Enhanced visual effects */
+        .glow-effect {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, 
+                rgba(30, 144, 255, 0.2) 0%,
+                rgba(138, 43, 226, 0.15) 30%,
+                rgba(0, 255, 127, 0.1) 60%,
+                transparent 100%);
+            border-radius: 50%;
+            animation: pulse 6s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .glow-effect::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, 
+                rgba(255, 255, 255, 0.1) 0%,
+                transparent 70%);
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite reverse;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.4;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.3);
+                opacity: 0.2;
+            }
+        }
+
+        /* New: Ambient light effects */
+        .ambient-light {
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            filter: blur(40px);
+            animation: ambientMove 20s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .ambient-light:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            background: rgba(30, 144, 255, 0.3);
+            animation-delay: 0s;
+        }
+
+        .ambient-light:nth-child(2) {
+            top: 20%;
+            right: 15%;
+            background: rgba(138, 43, 226, 0.3);
+            animation-delay: 5s;
+        }
+
+        .ambient-light:nth-child(3) {
+            bottom: 15%;
+            left: 20%;
+            background: rgba(0, 255, 127, 0.3);
+            animation-delay: 10s;
+        }
+
+        @keyframes ambientMove {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -20px) scale(1.2); }
+            50% { transform: translate(-20px, 30px) scale(0.8); }
+            75% { transform: translate(20px, 20px) scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Starfield -->
+    <div class="stars">
+        <!-- Small stars - Dense background layer -->
+        <div class="star small" style="top: 5%; left: 8%;"></div>
+        <div class="star small" style="top: 7%; left: 23%;"></div>
+        <div class="star small" style="top: 9%; left: 41%;"></div>
+        <div class="star small" style="top: 11%; left: 67%;"></div>
+        <div class="star small" style="top: 13%; left: 89%;"></div>
+        <div class="star small" style="top: 16%; left: 12%;"></div>
+        <div class="star small" style="top: 18%; left: 34%;"></div>
+        <div class="star small" style="top: 21%; left: 56%;"></div>
+        <div class="star small" style="top: 24%; left: 78%;"></div>
+        <div class="star small" style="top: 27%; left: 93%;"></div>
+        <div class="star small" style="top: 29%; left: 19%;"></div>
+        <div class="star small" style="top: 32%; left: 45%;"></div>
+        <div class="star small" style="top: 35%; left: 71%;"></div>
+        <div class="star small" style="top: 38%; left: 2%;"></div>
+        <div class="star small" style="top: 41%; left: 28%;"></div>
+        <div class="star small" style="top: 44%; left: 52%;"></div>
+        <div class="star small" style="top: 47%; left: 84%;"></div>
+        <div class="star small" style="top: 50%; left: 15%;"></div>
+        <div class="star small" style="top: 53%; left: 39%;"></div>
+        <div class="star small" style="top: 56%; left: 63%;"></div>
+        <div class="star small" style="top: 59%; left: 87%;"></div>
+        <div class="star small" style="top: 62%; left: 6%;"></div>
+        <div class="star small" style="top: 65%; left: 31%;"></div>
+        <div class="star small" style="top: 68%; left: 54%;"></div>
+        <div class="star small" style="top: 71%; left: 76%;"></div>
+        <div class="star small" style="top: 74%; left: 98%;"></div>
+        <div class="star small" style="top: 77%; left: 22%;"></div>
+        <div class="star small" style="top: 80%; left: 48%;"></div>
+        <div class="star small" style="top: 83%; left: 69%;"></div>
+        <div class="star small" style="top: 86%; left: 91%;"></div>
+        <div class="star small" style="top: 89%; left: 13%;"></div>
+        <div class="star small" style="top: 92%; left: 37%;"></div>
+        <div class="star small" style="top: 95%; left: 61%;"></div>
+        <div class="star small" style="top: 98%; left: 83%;"></div>
+        <div class="star small" style="top: 3%; left: 57%;"></div>
+        <div class="star small" style="top: 6%; left: 73%;"></div>
+        <div class="star small" style="top: 14%; left: 47%;"></div>
+        <div class="star small" style="top: 17%; left: 81%;"></div>
+        <div class="star small" style="top: 23%; left: 26%;"></div>
+        <div class="star small" style="top: 26%; left: 64%;"></div>
+        <div class="star small" style="top: 33%; left: 88%;"></div>
+        <div class="star small" style="top: 36%; left: 14%;"></div>
+        <div class="star small" style="top: 42%; left: 59%;"></div>
+        <div class="star small" style="top: 46%; left: 3%;"></div>
+        <div class="star small" style="top: 49%; left: 77%;"></div>
+        <div class="star small" style="top: 52%; left: 25%;"></div>
+        <div class="star small" style="top: 58%; left: 43%;"></div>
+        <div class="star small" style="top: 61%; left: 79%;"></div>
+        <div class="star small" style="top: 67%; left: 9%;"></div>
+        <div class="star small" style="top: 73%; left: 35%;"></div>
+        <div class="star small" style="top: 76%; left: 58%;"></div>
+        <div class="star small" style="top: 82%; left: 16%;"></div>
+        <div class="star small" style="top: 85%; left: 42%;"></div>
+        <div class="star small" style="top: 91%; left: 66%;"></div>
+        <div class="star small" style="top: 94%; left: 29%;"></div>
+        <div class="star small" style="top: 97%; left: 51%;"></div>
+        <div class="star small" style="top: 1%; left: 74%;"></div>
+        <div class="star small" style="top: 4%; left: 96%;"></div>
+        <div class="star small" style="top: 8%; left: 32%;"></div>
+        <div class="star small" style="top: 12%; left: 55%;"></div>
+        <div class="star small" style="top: 19%; left: 7%;"></div>
+        <div class="star small" style="top: 22%; left: 85%;"></div>
+        <div class="star small" style="top: 28%; left: 11%;"></div>
+        
+        <!-- Medium stars - Mid-layer -->
+        <div class="star medium" style="top: 12%; left: 35%;"></div>
+        <div class="star medium" style="top: 18%; left: 72%;"></div>
+        <div class="star medium" style="top: 25%; left: 18%;"></div>
+        <div class="star medium" style="top: 32%; left: 62%;"></div>
+        <div class="star medium" style="top: 38%; left: 8%;"></div>
+        <div class="star medium" style="top: 45%; left: 86%;"></div>
+        <div class="star medium" style="top: 52%; left: 29%;"></div>
+        <div class="star medium" style="top: 58%; left: 65%;"></div>
+        <div class="star medium" style="top: 65%; left: 41%;"></div>
+        <div class="star medium" style="top: 72%; left: 14%;"></div>
+        <div class="star medium" style="top: 78%; left: 79%;"></div>
+        <div class="star medium" style="top: 85%; left: 52%;"></div>
+        <div class="star medium" style="top: 92%; left: 24%;"></div>
+        <div class="star medium" style="top: 6%; left: 94%;"></div>
+        <div class="star medium" style="top: 15%; left: 59%;"></div>
+        <div class="star medium" style="top: 23%; left: 3%;"></div>
+        <div class="star medium" style="top: 31%; left: 76%;"></div>
+        <div class="star medium" style="top: 39%; left: 47%;"></div>
+        <div class="star medium" style="top: 46%; left: 21%;"></div>
+        <div class="star medium" style="top: 54%; left: 83%;"></div>
+        <div class="star medium" style="top: 61%; left: 6%;"></div>
+        <div class="star medium" style="top: 69%; left: 68%;"></div>
+        <div class="star medium" style="top: 75%; left: 36%;"></div>
+        <div class="star medium" style="top: 82%; left: 91%;"></div>
+        <div class="star medium" style="top: 89%; left: 44%;"></div>
+        <div class="star medium" style="top: 96%; left: 17%;"></div>
+        
+        <!-- Large stars - Prominent layer -->
+        <div class="star large" style="top: 8%; left: 75%;"></div>
+        <div class="star large" style="top: 16%; left: 26%;"></div>
+        <div class="star large" style="top: 24%; left: 88%;"></div>
+        <div class="star large" style="top: 33%; left: 12%;"></div>
+        <div class="star large" style="top: 41%; left: 69%;"></div>
+        <div class="star large" style="top: 49%; left: 43%;"></div>
+        <div class="star large" style="top: 57%; left: 91%;"></div>
+        <div class="star large" style="top: 65%; left: 17%;"></div>
+        <div class="star large" style="top: 73%; left: 54%;"></div>
+        <div class="star large" style="top: 81%; left: 31%;"></div>
+        <div class="star large" style="top: 89%; left: 78%;"></div>
+        <div class="star large" style="top: 4%; left: 48%;"></div>
+        <div class="star large" style="top: 13%; left: 82%;"></div>
+        <div class="star large" style="top: 21%; left: 37%;"></div>
+        <div class="star large" style="top: 29%; left: 95%;"></div>
+        <div class="star large" style="top: 37%; left: 23%;"></div>
+        <div class="star large" style="top: 45%; left: 71%;"></div>
+        <div class="star large" style="top: 53%; left: 9%;"></div>
+        <div class="star large" style="top: 61%; left: 58%;"></div>
+        <div class="star large" style="top: 69%; left: 86%;"></div>
+        <div class="star large" style="top: 77%; left: 2%;"></div>
+        <div class="star large" style="top: 85%; left: 64%;"></div>
+        <div class="star large" style="top: 93%; left: 39%;"></div>
+    </div>
+
+    <!-- Ambient lighting effects -->
+    <div class="ambient-light"></div>
+    <div class="ambient-light"></div>
+    <div class="ambient-light"></div>
+
+    <!-- Animated background particles -->
+    <div class="background">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Main content -->
+    <div class="container">
+        <div class="logo-container">
+            <div class="glow-effect"></div>
+            <img src="hackkshetra-3-logo.png" alt="HACKKSHETRA 3.0 logo" class="logo">
+        </div>
+        
+        <h1 class="title">HACKKSHETRA 3.0</h1>
+        
+        <p class="loading-text">We Are Loading Soon...</p>
+        
+        <div class="spinner"></div>
+        
+        <p class="coming-soon">Something Amazing Is Coming Your Way</p>
+    </div>
+</body>
+</html>
